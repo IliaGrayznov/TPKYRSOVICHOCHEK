@@ -323,6 +323,7 @@
     <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Return\Delete.cshtml" />
     <Content Include="Views\Home\PurchaseStatus.cshtml" />
+    <Content Include="Views\Home\ControlIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
