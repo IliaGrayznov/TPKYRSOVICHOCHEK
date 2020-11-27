@@ -12,8 +12,15 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         ProductDAO prodactDAO = new ProductDAO();
-        ReturnDAO returnDAO = new ReturnDAO();
-        [Authorize(Roles = "Admin,Visitor")]
+        PurchaseDAO purchaseDAO = new PurchaseDAO();
+
+        [Authorize(Roles = "Seller, Buyer, Consultant")]
+        public ActionResult Main()
+        {
+             return View();
+        }
+
+        [Authorize(Roles = "Seller, Buyer, Consultant")]
         public ActionResult Index(string type)
         {
             if (type.IsNullOrWhiteSpace())
@@ -26,35 +33,69 @@ namespace WebApplication1.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin, Visitor")]
-        public ActionResult Return()
+        [Authorize(Roles = "Seller, Buyer, Consultant")] // потом оставить только продавца
+        public ActionResult IndexPurchase()
         {
-            return View("Return");
+                return View(purchaseDAO.getAllPurhcase());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize(Roles = "Admin, Visitor")]
-        public ActionResult Return([Bind(Exclude = "ID")] Return ret)
-        {
-            try
-            {
-                if (returnDAO.addReturn(ret))
-                    return View("suckcessReturn");
-                else
-                {
-                    return View("badReturn");
-                }
-            }
-            catch
-            {
-                return View("Return");
-            }
-        }
 
-        [Authorize(Roles = "Admin,Visitor")]
+
+        [Authorize(Roles = "Seller, Buyer, Consultant")]
         public ActionResult Details(int id)
         {
             return View(prodactDAO.getProduct(id));
+        }
+
+       public ActionResult Create()
+        {
+            return View("Create");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя
+        public ActionResult Create([Bind(Exclude = "Id")] int ProductId, Purchase purchase)
+        {
+            if (purchaseDAO.addPurchase(ProductId, purchase))
+                return View("Purchase", purchase);
+            else
+                return View("Error");
+        }
+
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только продавца
+        public ActionResult Buy(int id)
+        {
+            return View("Buy", purchaseDAO.getPurchase(id));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только продавца
+        public ActionResult Buy(int id, Purchase purchase)
+        {
+           if (purchaseDAO.updateStatus(purchase, "Finished"))
+                return RedirectToAction("IndexPurchase");
+            else
+                return View("Error");
+        }
+
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя
+        public ActionResult PurchaseStatus()
+        {
+            return View("PurchaseStatus");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя
+        public ActionResult PurchaseStatus(Purchase purchase)
+        {
+            try
+            {
+                return View("Purchase", purchaseDAO.getPurchase(purchase.Id));
+            }
+            catch (Exception e)
+            {
+                return View("Error");
+            }
         }
 
         /*[Authorize(Roles = "Admin")]

@@ -31,5 +31,35 @@ namespace WebApplication1.DAO
                     where p.Id == id
                     select p).FirstOrDefault();
         }
+
+        public bool updateCount(Product product,  int count)
+        {
+            Product origProd = getProduct(product.Id);
+            try
+            {
+                origProd.count = origProd.count - count;
+                doom.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool deleteProduct(Product product)
+        {
+            try
+            {
+                Product origProd = getProduct(product.Id);
+                doom.Product.Remove(origProd);
+                doom.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

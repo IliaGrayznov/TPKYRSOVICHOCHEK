@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebApplication1.Models.Return>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purchase.date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.PurchaseID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Purchase.date)
+    </td>
+    <td>
+        @Html.ActionLink("Approve", "Approve", new { id = item.Id }) |
+        @Html.ActionLink("Do not Approve", "Delete", new { id = item.Id }) |
+    </td>
+</tr>
+}
+
+</table>
