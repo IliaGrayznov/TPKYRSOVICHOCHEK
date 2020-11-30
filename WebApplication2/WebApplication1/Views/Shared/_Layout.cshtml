@@ -26,13 +26,11 @@
                     <li>@Html.ActionLink("Return product", "Return", "Return")</li>
                     <li>@Html.ActionLink("Informaion", "About", "Home")</li>
                     <li>@Html.ActionLink("Our contacts", "Contact", "Home")</li>
-                    <li>
-                        <audio controls>
-                            <source  src="C:\Users\mayse100\Desktop\bpm_bullets_per_minute_soundtrack_mp3\08 - Sam Houghton and Joe Collinson - Paradox.mp3" type="audio/mp3">
-                            <p>Your browser doesn't support HTML5 audio. Here is a <a href="C:\Users\mayse100\Desktop\bpm_bullets_per_minute_soundtrack_mp3\08 - Sam Houghton and Joe Collinson - Paradox.mp3">link to the audio</a> instead.</p>
-                        </audio>
-                    </li>
-</ul>
+                    @if (Request.IsAuthenticated && User.IsInRole("Consultant"))
+                    {
+                         <li>@Html.ActionLink("OualityControl", "ControlIndex", "Home")</li>
+                    }
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -41,6 +39,10 @@
         @RenderBody()
         <hr />
         <footer>
+                <audio controls>
+                    <source src="C:\Users\mayse100\Desktop\bpm_bullets_per_minute_soundtrack_mp3\08 - Sam Houghton and Joe Collinson - Paradox.mp3" type="audio/mp3">
+                    <p>Your browser doesn't support HTML5 audio. Here is a <a href="C:\Users\mayse100\Desktop\bpm_bullets_per_minute_soundtrack_mp3\08 - Sam Houghton and Joe Collinson - Paradox.mp3">link to the audio</a> instead.</p>
+                </audio>
             <p>&copy; @DateTime.Now.Year -  DOOMshop</p>
         </footer>
     </div>

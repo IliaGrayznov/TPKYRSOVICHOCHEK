@@ -18,6 +18,44 @@ namespace WebApplication1.DAO
                     select p);
         }
 
+        public IEnumerable<Product> getAllNotControlProducts()
+        {
+            return (from p in doom.Product
+                    where p.qualitycontrol == 0
+                    select p);
+        }
+
+
+        public bool Control(Product product)
+        {
+            Product origProd = getProduct(product.Id);
+            try
+            {
+                origProd.qualitycontrol = 1;
+                doom.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool NotControl(Product product)
+        {
+            Product origProd = getProduct(product.Id);
+            try
+            {
+                doom.Product.Remove(origProd);
+                doom.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         public IEnumerable<Product> getProductsByType(string type)
         {
             return (from p in doom.Product
