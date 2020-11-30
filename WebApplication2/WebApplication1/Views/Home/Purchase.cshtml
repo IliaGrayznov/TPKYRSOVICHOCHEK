@@ -47,5 +47,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @if (Request.IsAuthenticated && User.IsInRole("Seller"))
+    {
+    <button type="button" class="btn btn-default">@Html.ActionLink("Give out", "Buy", new { id = Model.Id }) |</button>
+    }
 </p>
