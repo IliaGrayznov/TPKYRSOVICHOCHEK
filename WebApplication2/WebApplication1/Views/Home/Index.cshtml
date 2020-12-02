@@ -4,12 +4,23 @@
 
 @if (Request.IsAuthenticated && User.IsInRole("Seller"))
 {
-    <button type="button" class="btn btn-default">@Html.ActionLink("give out purchase", "IndexPurchase")</button>
+    <button type="button" class="btn btn-default">@Html.ActionLink("All purchase", "IndexPurchase")</button>
+    <button type="button" class="btn btn-default">@Html.ActionLink("Find purchase", "PurchaseStatus")</button>
 }
 @if (Request.IsAuthenticated && User.IsInRole("Buyer"))
 {
     <button type="button" class="btn btn-default">@Html.ActionLink("Show my purchase status", "PurchaseStatus")</button>
 }
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Type
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @Html.ActionLink("String", "Index", new { type = "String" })<br />
+        @Html.ActionLink("Wind", "Index", new { type = "Wind" })<br />
+        @Html.ActionLink("Keyboard", "Index", new { type = "Keyboard" })
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>

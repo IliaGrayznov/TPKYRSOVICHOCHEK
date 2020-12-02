@@ -34,7 +34,7 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize(Roles = "Seller, Buyer, Consultant")] // потом оставить только консультанта
-        public ActionResult ControlIndex(string type)
+        public ActionResult ControlIndex()
         {
 
             return View(prodactDAO.getAllNotControlProducts());
@@ -59,7 +59,14 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Seller, Buyer, Consultant")] // потом оставить только продавца
         public ActionResult IndexPurchase()
         {
+            try
+            {
                 return View(purchaseDAO.getAllPurhcase());
+            }
+            catch(Exception e)
+            {
+                return View("Error");
+            }
         }
 
 
