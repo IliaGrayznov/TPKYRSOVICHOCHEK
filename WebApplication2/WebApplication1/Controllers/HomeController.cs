@@ -14,13 +14,13 @@ namespace WebApplication1.Controllers
         ProductDAO prodactDAO = new ProductDAO();
         PurchaseDAO purchaseDAO = new PurchaseDAO();
 
-        [Authorize(Roles = "Seller, Buyer, Consultant")]
+        [AllowAnonymous]
         public ActionResult Main()
         {
              return View();
         }
 
-        [Authorize(Roles = "Seller, Buyer, Consultant")]
+        [AllowAnonymous]
         public ActionResult Index(string type)
         {
             if (type.IsNullOrWhiteSpace())
@@ -77,7 +77,8 @@ namespace WebApplication1.Controllers
             return View(prodactDAO.getProduct(id));
         }
 
-       public ActionResult Create()
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя
+        public ActionResult Create()
         {
             return View("Create");
         }
@@ -202,6 +203,7 @@ namespace WebApplication1.Controllers
             }
         }*/
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -209,6 +211,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
