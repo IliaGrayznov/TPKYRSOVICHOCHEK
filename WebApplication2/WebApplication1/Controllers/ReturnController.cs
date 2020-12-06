@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DAO;
+using WebApplication1.DAO.interfaces;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -14,8 +15,9 @@ namespace WebApplication1.Controllers
     public class ReturnController : Controller
     {
         private DOOMshop2 db = new DOOMshop2();
-        private ReturnDAO returnDAO = new ReturnDAO();
+        private IreturnDAO returnDAO = new ReturnDAO();
 
+       
 
         [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя и продавца
         public ActionResult Return()
