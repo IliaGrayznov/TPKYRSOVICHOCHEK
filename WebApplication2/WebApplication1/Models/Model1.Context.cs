@@ -30,5 +30,7 @@ namespace WebApplication1.Models
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<Return> Return { get; set; }
+
+        public System.Data.Entity.DbSet<WebApplication1.Models.Payment> Payments { get; set; }
     }
 }

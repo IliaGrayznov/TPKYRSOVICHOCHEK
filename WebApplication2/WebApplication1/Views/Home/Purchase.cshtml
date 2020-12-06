@@ -49,6 +49,10 @@
 <p>
     @if (Request.IsAuthenticated && User.IsInRole("Seller"))
     {
-    <button type="button" class="btn btn-default">@Html.ActionLink("Give out", "Buy", new { id = Model.Id }) |</button>
+        <button type="button" class="btn btn-default">@Html.ActionLink("Give out", "Buy", new { id = Model.Id }) </button>
+    }
+    @if (Request.IsAuthenticated && User.IsInRole("Buyer"))
+    {
+        <button type="button" class="btn btn-default">@Html.ActionLink("Payment by card", "Pay", new { purchaseID = Model.Id }) </button>
     }
 </p>

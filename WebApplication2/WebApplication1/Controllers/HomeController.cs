@@ -87,8 +87,22 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя
         public ActionResult Create([Bind(Exclude = "Id")] int ProductId, Purchase purchase)
         {
+            if (purchase.count > 10)
+                return View("Payment");
             if (purchaseDAO.addPurchase(ProductId, purchase))
                 return View("Purchase", purchase);
+            else
+                return View("Error");
+        }
+
+        [Authorize(Roles = "Seller, Buyer, Consultant")]  // потом оставить только покупателя
+        public ActionResult Pay(int? purchaseID)
+        {
+            if (purchaseID == null)
+                return View("Pay");
+            if (purchaseDAO.updateStatus(purchaseDAO.getPurchase((int)purchaseID), "Pay_Wait"))
+                return View("Payment");
+           //after payment :        purchaseDAO.updateStatus(purchaseDAO.getPurchase((int)purchaseID), "Created");
             else
                 return View("Error");
         }
