@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.DAO.interfaces;
 using WebApplication1.Models;
 
 namespace WebApplication1.DAO
 {
-    public class ReturnDAO
+    public class ReturnDAO : IreturnDAO
     {
         private DOOMshop2 doom = new DOOMshop2();
-        private PurchaseDAO purchaseDAO = new PurchaseDAO();
+        private IpurchaseDAO purchaseDAO = new PurchaseDAO();
 
         public Purchase GetPurchase(int? id)
         {

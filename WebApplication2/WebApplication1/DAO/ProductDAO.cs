@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.DAO.interfaces;
 using WebApplication1.Models;
 
 namespace WebApplication1.DAO
 {
-    public class ProductDAO
+    public class ProductDAO :IproductDAO
     {
         private DOOMshop2 doom = new DOOMshop2();
 

@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.DAO.interfaces;
 using WebApplication1.Models;
 
 namespace WebApplication1.DAO
 {
-    public class PurchaseDAO
+    public class PurchaseDAO :IpurchaseDAO
     {
         private DOOMshop2 doom = new DOOMshop2();
-        private Product p = new Product();
-        private ProductDAO pd = new ProductDAO();
-        private OrderDAO od = new OrderDAO();
+        private IproductDAO pd = new ProductDAO();
+        private IorderDAO od = new OrderDAO();
         public Purchase getPurchase(int id)
         {
             return (from p in doom.Purchase

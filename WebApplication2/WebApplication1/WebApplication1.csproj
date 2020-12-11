@@ -187,6 +187,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReturnController.cs" />
+    <Compile Include="DAO\DAOfactory.cs" />
+    <Compile Include="DAO\interfaces\IDAOfactory.cs" />
+    <Compile Include="DAO\interfaces\IorderDAO.cs" />
+    <Compile Include="DAO\interfaces\IproductDAO.cs" />
+    <Compile Include="DAO\interfaces\IpurchaseDAO.cs" />
+    <Compile Include="DAO\interfaces\IreturnDAO.cs" />
     <Compile Include="DAO\old\DAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />

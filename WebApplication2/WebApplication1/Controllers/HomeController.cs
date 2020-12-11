@@ -5,14 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DAO;
+using WebApplication1.DAO.interfaces;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        ProductDAO prodactDAO = new ProductDAO();
-        PurchaseDAO purchaseDAO = new PurchaseDAO();
+        private IproductDAO prodactDAO = new ProductDAO();
+        private IpurchaseDAO purchaseDAO = new PurchaseDAO();
 
         [AllowAnonymous]
         public ActionResult Main()
